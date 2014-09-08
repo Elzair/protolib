@@ -4,7 +4,8 @@
   "description": "Javascript library for doing Object-Oriented programming using the prototype system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm install",
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Elzair/protolib/issues"
   },
-  "homepage": "https://github.com/Elzair/protolib"
+  "homepage": "https://github.com/Elzair/protolib",
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  }
 }
