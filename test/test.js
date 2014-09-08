@@ -3,22 +3,6 @@ var assert   = require('assert')
   ;
 
 describe('protolib', function() {
-  describe('mixin', function() {
-    it('should add the prototype properties to the given object', function() {
-      var proto = {type: 'list', values: [1, 2, 3]};
-      var object = {readonly: true};
-      protolib.mixin(object, proto);
-      assert.deepEqual(object, {readonly: true, type: 'list', values: [1, 2, 3]});
-    });
-
-    it('should overwrite any existing properties with duplicate names', function() {
-      var proto = {type: 'list', values: [1, 2, 3]};
-      var object = {type: 'none'};
-      protolib.mixin(object, proto);
-      assert.deepEqual(object, proto);
-    });
-  });
-
   describe('clone', function() {
     it('should create a clone of the given object', function() {
       var object = {name: 'Philip', hello: function() { return 'Hello, my name is ' + this.name; }};
@@ -41,6 +25,22 @@ describe('protolib', function() {
       assert.strictEqual(object.foo, 'bar');
       proto.foo = 'baz';
       assert.strictEqual(object.foo, 'baz');
+    });
+  });
+
+  describe('mixin', function() {
+    it('should add the prototype properties to the given object', function() {
+      var proto = {type: 'list', values: [1, 2, 3]};
+      var object = {readonly: true};
+      protolib.mixin(object, proto);
+      assert.deepEqual(object, {readonly: true, type: 'list', values: [1, 2, 3]});
+    });
+
+    it('should overwrite any existing properties with duplicate names', function() {
+      var proto = {type: 'list', values: [1, 2, 3]};
+      var object = {type: 'none'};
+      protolib.mixin(object, proto);
+      assert.deepEqual(object, proto);
     });
   });
 });

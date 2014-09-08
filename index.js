@@ -1,9 +1,3 @@
-exports.mixin = function(object, base) {
-  for (var property in base) {
-    object[property] = base[property];
-  }
-};
-
 exports.clone = function(object) {
   var object_clone = {};
   for (var property in object) {
@@ -25,5 +19,11 @@ exports.inherit = function(proto) {
     var Constructor = function(){};
     Constructor.prototype = proto;
     return new Constructor();
+  }
+};
+
+exports.mixin = function(object, proto) {
+  for (var property in proto) {
+    object[property] = proto[property];
   }
 };
