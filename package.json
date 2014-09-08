@@ -1,6 +1,6 @@
 {
   "name": "protolib",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Javascript library for doing Object-Oriented programming using the prototype system",
   "main": "index.js",
   "scripts": {

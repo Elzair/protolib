@@ -1,7 +1,12 @@
 exports.clone = function(object) {
   var object_clone = {};
   for (var property in object) {
-    object_clone[property] = object[property]; 
+    if (typeof object[property] === 'function') {
+      object_clone[property] = object[property].bind(object_clone);
+    }
+    else {
+      object_clone[property] = object[property]; 
+    }
   }
   return object_clone;
 };
@@ -24,6 +29,11 @@ exports.inherit = function(proto) {
 
 exports.mixin = function(object, proto) {
   for (var property in proto) {
-    object[property] = proto[property];
+    if (typeof proto[property] === 'function') {
+      object[property] = property[property].bind(object);
+    }
+    else {
+      object[property] = proto[property]; 
+    }
   }
 };

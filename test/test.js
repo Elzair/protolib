@@ -7,7 +7,8 @@ describe('protolib', function() {
     it('should create a clone of the given object', function() {
       var object = {name: 'Philip', hello: function() { return 'Hello, my name is ' + this.name; }};
       var object_clone = protolib.clone(object);
-      assert.deepEqual(object, object_clone);
+      assert.strictEqual(object_clone.name, 'Philip');
+      assert.strictEqual(object_clone.hello(), 'Hello, my name is Philip');
     });
 
     it('should not simply create a reference to the input object', function() {
