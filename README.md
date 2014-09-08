@@ -59,7 +59,7 @@ var protolib = require('protolib');
 var proto = {type: 'list', values: [1, 2, 3]};
 var object = {readonly: true};
 protolib.mixin(object, proto);
-console.log(JSON.stringify(protolib, null, 2));
+console.log(JSON.stringify(object, null, 2));
 ```
 
 Output: 
