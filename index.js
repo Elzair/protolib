@@ -4,8 +4,11 @@ exports.clone = function(object) {
     if (typeof object[property] === 'function') {
       object_clone[property] = object[property].bind(object_clone);
     }
+    else if (typeof object[property] === 'object'){
+      object_clone[property] = exports.clone(object[property]); 
+    }
     else {
-      object_clone[property] = object[property]; 
+      object_clone[property] = object[property];
     }
   }
   return object_clone;
