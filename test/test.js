@@ -5,10 +5,18 @@ var assert   = require('assert')
 describe('protolib', function() {
   describe('clone', function() {
     it('should create a clone of the given object', function() {
-      var object = {name: 'Philip', hello: function() { return 'Hello, my name is ' + this.name; }};
+      var object = {
+          name: 'Philip'
+        , arr: [1, {foo: 'bar'}]
+        , hello: function() { return 'Hello, my name is ' + this.name; }
+        , date: new Date()
+      };
       var object_clone = protolib.clone(object);
       assert.strictEqual(object_clone.name, 'Philip');
       assert.strictEqual(object_clone.hello(), 'Hello, my name is Philip');
+      assert(Array.isArray(object_clone.arr));
+      assert.strictEqual(object_clone.arr[1].foo, "bar");
+      assert.strictEqual(object_clone.date.getMonth(), new Date().getMonth());
     });
 
     it('should not simply create a reference to the input object', function() {
