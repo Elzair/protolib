@@ -1,22 +1,27 @@
+var typeOf = require('typeof');
+
 exports.clone = function(object) {
-  if (!Array.isArray(object) && (object !== null) && (typeof object !== 'object')) {
+  if (object !== Object(object)) {
     throw new Error("Cannot clone!");
   }
+
   var object_clone = Array.isArray(object) ? [] : {};
+
   for (var property in object) {
-    if (typeof object[property] === 'function') {
+    if (typeOf(object[property]) === 'function') {
       object_clone[property] = object[property].bind(object_clone);
     }
-    else if (typeof object[property] !== 'string' && !isNaN(new Date(object[property]).getDate())) {
+    else if (typeOf(object[property]) === 'date') {
       object_clone[property] = new Date(object[property].toString());
     }
-    else if (typeof object[property] === 'object'){
+    else if (typeOf(object[property]) === 'object'){
       object_clone[property] = exports.clone(object[property]); 
     }
     else {
       object_clone[property] = object[property];
     }
   }
+
   return object_clone;
 };
 

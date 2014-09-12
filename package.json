@@ -26,5 +26,8 @@
   "homepage": "https://github.com/Elzair/protolib",
   "devDependencies": {
     "mocha": "^1.21.4"
+  },
+  "dependencies": {
+    "typeof": "~1.0.0"
   }
 }
