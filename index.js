@@ -6,7 +6,12 @@ exports.clone = function(object) {
     throw new Error("Cannot clone!");
   }
 
-  return clone_helper(object, []);
+  var clone_object = typeOf(object) === 'array' ? [] : {};
+  var objects = [object];
+  var clone_objects = [clone_object];
+
+  clone_helper(object, clone_object, objects, clone_objects);
+  return clone_objects[0];
 };
 
 exports.inherit = function(proto) {

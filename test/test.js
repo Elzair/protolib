@@ -1,5 +1,6 @@
 var assert   = require('assert')
   , protolib = require(__dirname + '/../')
+  , typeOf   = require('typeof')
   ;
 
 describe('protolib', function() {
@@ -7,23 +8,36 @@ describe('protolib', function() {
     it('should create a clone of the given object', function() {
       var object = {
           name: 'Philip'
-        , arr: [1, {foo: 'bar'}]
         , hello: function() { return 'Hello, my name is ' + this.name; }
         , date: new Date()
+        , arr: [1, {foo: 'bar'}]
       };
-      var object_clone = protolib.clone(object);
-      assert.strictEqual(object_clone.name, 'Philip');
-      assert.strictEqual(object_clone.hello(), 'Hello, my name is Philip');
-      assert(Array.isArray(object_clone.arr));
-      assert.strictEqual(object_clone.arr[1].foo, "bar");
-      assert.strictEqual(object_clone.date.getMonth(), new Date().getMonth());
+      var clone_object = protolib.clone(object);
+      assert.strictEqual(clone_object.name, 'Philip');
+      assert.strictEqual(clone_object.hello(), 'Hello, my name is Philip');
+      assert.strictEqual(clone_object.date.getMonth(), new Date().getMonth());
+      assert.strictEqual(typeOf(clone_object.arr), 'array');
+      assert.strictEqual(clone_object.arr[1].foo, "bar");
     });
 
     it('should not simply create a reference to the input object', function() {
       var object = {name: 'Philip', hello: function() { return 'Hello, my name is ' + this.name; }};
-      var object_clone = protolib.clone(object);
-      object_clone.name = 'John';
-      assert.strictEqual(object_clone.hello(), 'Hello, my name is John');
+      var clone_object = protolib.clone(object);
+      clone_object.name = 'John';
+      assert.strictEqual(clone_object.hello(), 'Hello, my name is John');
+    });
+
+    it('should handle circular dependencies', function() {
+      var object = {
+          name: 'Philip'
+        , hello: function() { return 'Hello, my name is ' + this.name; }
+        , date: new Date()
+        , arr: [1, {foo: 'bar'}]
+      };
+      object.arr[2] = object;
+      var clone_object = protolib.clone(object);
+      assert(clone_object.arr[2] === clone_object);
+      assert.strictEqual(clone_object.arr[2].arr, clone_object.arr);
     });
   });
 
