@@ -1,11 +1,11 @@
 var typeOf = require('typeof');
 
 exports.clone = function(object) {
-  if (object !== Object(object)) {
+  if (typeOf(object) !== 'object' && typeOf(object) !== 'array') {
     throw new Error("Cannot clone!");
   }
 
-  var object_clone = Array.isArray(object) ? [] : {};
+  var object_clone = typeOf(object) === 'array' ? [] : {};
 
   for (var property in object) {
     if (typeOf(object[property]) === 'function') {
@@ -43,7 +43,7 @@ exports.inherit = function(proto) {
 
 exports.mixin = function(object, proto) {
   for (var property in proto) {
-    if (typeof proto[property] === 'function') {
+    if (typeOf(proto[property]) === 'function') {
       object[property] = property[property].bind(object);
     }
     else {
