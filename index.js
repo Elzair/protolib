@@ -2,7 +2,11 @@ var clone_helper = require(__dirname + '/lib/clone-helper')
   , typeOf       = require('typeof');
 
 exports.clone = function(object) {
-  return clone_helper(object);
+  if (typeOf(object) !== 'object' && typeOf(object) !== 'array') {
+    throw new Error("Cannot clone!");
+  }
+
+  return clone_helper(object, []);
 };
 
 exports.inherit = function(proto) {
