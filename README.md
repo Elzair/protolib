@@ -83,7 +83,7 @@ Output:
 
 ### new
 
-Do you like prototypes but still sometimes have to use constructors? Well, now you can ditch the **new** keyword and use `new` instead.
+Do you like prototypes but still sometimes have to use constructors? Well, now you can ditch the **new** keyword and use `new()` instead.
 
 #### Example
 
