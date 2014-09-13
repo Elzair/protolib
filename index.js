@@ -10,8 +10,7 @@ exports.clone = function(object) {
   var objects = [object];
   var clone_objects = [clone_object];
 
-  clone_helper(object, clone_object, objects, clone_objects);
-  return clone_objects[0];
+  return clone_helper(object, clone_object, objects, clone_objects);
 };
 
 exports.inherit = function(proto) {
