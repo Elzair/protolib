@@ -17,7 +17,7 @@ Use
 
 ### clone(object)
 
-This method returns an object with all the properties of `object`. 
+This method returns an object with all the properties of the parameter `object`. 
 
 #### Example
 
