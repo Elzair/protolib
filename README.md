@@ -19,6 +19,8 @@ Use
 
 This method returns an object with all the properties of the parameter `object`. 
 
+**NOTE:** This method will create copies of not only the input object but also every object and array in its prototype chain. It can even handle circular dependencies.
+
 #### Example
 
 ```javascript
@@ -28,9 +30,16 @@ var object = {
   , hello: function() {
       console.log('Hello, my name is ' + this.name);
     }
+  , foo: {
+      bar: {
+        baz: [ 'test' ]
+      }
+    }
 };
+
 var object_clone = protolib.clone(object);
-object_clone.hello(); // outputs 'Hello, my name is Philip'
+object_clone.foo.bar.baz[1] = object;
+object_clone.foo.bar.baz[1].hello(); // outputs 'Hello, my name is Philip'
 ```
 
 ### inherit(proto)
@@ -70,6 +79,18 @@ Output:
   type: "list",
   values: [1, 2, 3]
 }
+```
+
+### new
+
+Do you like prototypes but still sometimes have to use constructors? Well, now you can ditch the **new** keyword and use `new` instead.
+
+#### Example
+
+```javascript
+var protolib = require('protolib');
+var date = protolib.new(Date, 'December 17, 1995 03:24:00');
+console.log(date.getMonth()); // outputs 12
 ```
 
 Test
