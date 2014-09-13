@@ -20,24 +20,13 @@ describe('protolib', function() {
       assert.strictEqual(clone_object.arr[1].foo, "bar");
     });
 
-    it('should not simply create a reference to the input object', function() {
-      var object = {name: 'Philip', hello: function() { return 'Hello, my name is ' + this.name; }};
-      var clone_object = protolib.clone(object);
-      clone_object.name = 'John';
-      assert.strictEqual(clone_object.hello(), 'Hello, my name is John');
-    });
-
-    it('should handle circular dependencies', function() {
-      var object = {
-          name: 'Philip'
-        , hello: function() { return 'Hello, my name is ' + this.name; }
-        , date: new Date()
-        , arr: [1, {foo: 'bar'}]
-      };
-      object.arr[2] = object;
-      var clone_object = protolib.clone(object);
-      assert(clone_object.arr[2] === clone_object);
-      assert.strictEqual(clone_object.arr[2].arr, clone_object.arr);
+    it('should throw an error if input is not an object or array', function() {
+      try {
+        var x = protolib.clone("hello");
+      }
+      catch (err) {
+        assert(/Cannot clone/.exec(err));
+      }
     });
   });
 
