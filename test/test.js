@@ -60,6 +60,7 @@ describe('protolib', function() {
     it('should return an object created with the inputted constructor and arguments', function() {
       var test = protolib.new(Date, 'December 17, 1995 03:24:00');
       assert.strictEqual(typeOf(test), 'date');
+      assert.strictEqual(test.getYear(), 95);
     });
   });
 });
