@@ -1,4 +1,5 @@
 var clone_helper = require(__dirname + '/lib/clone-helper')
+  , poly    = require('polyfill-function-prototype-bind')
   , typeOf       = require('typeof');
 
 exports.clone = function(object) {
