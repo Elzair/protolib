@@ -4,7 +4,7 @@ var clone_helper = require(__dirname + '/lib/clone-helper')
 
 exports.clone = function(object) {
   if (typeOf(object) !== 'object' && typeOf(object) !== 'array') {
-    throw "Cannot clone!";
+    throw new Error('Cannot clone!');
   }
 
   var clone_object = typeOf(object) === 'array' ? [] : {};

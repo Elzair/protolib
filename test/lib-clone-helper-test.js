@@ -1,4 +1,4 @@
-var assert = require('assert')
+var expect = require('chai').expect
   , helper = require(__dirname + '/../lib/clone-helper')
   , typeOf = require('typeof')
   ;
@@ -13,11 +13,11 @@ describe('lib/clone-helper', function() {
     };
     var clone_object = {};
     clone_object = helper(object, clone_object, [object], [clone_object]);
-    assert.strictEqual(clone_object.name, 'Philip');
-    assert.strictEqual(clone_object.hello(), 'Hello, my name is Philip');
-    assert.strictEqual(clone_object.date.getMonth(), new Date().getMonth());
-    assert.strictEqual(typeOf(clone_object.arr), 'array');
-    assert.strictEqual(clone_object.arr[1].foo, "bar");
+    expect(clone_object).to.have.property('name', 'Philip');
+    expect(clone_object.hello()).to.equal('Hello, my name is Philip');
+    expect(clone_object.date.getMonth()).to.equal(new Date().getMonth());
+    expect(clone_object).to.have.deep.property('arr[0]', 1);
+    expect(clone_object).to.have.deep.property('arr[1].foo', 'bar');
   });
 
   it('should not simply create a reference to the input object', function() {
@@ -25,7 +25,7 @@ describe('lib/clone-helper', function() {
     var clone_object = {};
     clone_object = helper(object, clone_object, [object], [clone_object]);
     clone_object.name = 'John';
-    assert.strictEqual(clone_object.hello(), 'Hello, my name is John');
+    expect(clone_object.hello()).to.equal('Hello, my name is John');
   });
 
   it('should handle circular dependencies', function() {
@@ -38,8 +38,8 @@ describe('lib/clone-helper', function() {
     object.arr[2] = object;
     var clone_object = {};
     clone_object = helper(object, clone_object, [object], [clone_object]);
-    assert.strictEqual(clone_object.arr[2], clone_object);
-    assert.strictEqual(clone_object.arr[2].arr, clone_object.arr);
+    expect(clone_object.arr[2]).to.equal(clone_object);
+    expect(clone_object.arr[2].arr).to.equal(clone_object.arr);
   });
 
   it('should handle really crazy circular dependencies', function() {
@@ -54,8 +54,8 @@ describe('lib/clone-helper', function() {
     object.arr[1].test.baz = object.obj.hello;
     var clone_object = {};
     clone_object = helper(object, clone_object, [object], [clone_object]);
-    assert.strictEqual(clone_object.arr[2], clone_object);
-    assert.strictEqual(clone_object.arr[2].arr, clone_object.arr);
-    assert.strictEqual(clone_object.arr[1].test.baz, clone_object.obj.hello);
+    expect(clone_object.arr[2]).to.equal(clone_object);
+    expect(clone_object.arr[2].arr).to.equal(clone_object.arr);
+    expect(clone_object.arr[1].test.baz).to.equal(clone_object.obj.hello);
   });
 });

@@ -1,6 +1,5 @@
-var assert   = require('assert')
+var expect   = require('chai').expect
   , protolib = require(__dirname + '/../')
-  , typeOf   = require('typeof')
   ;
 
 describe('protolib', function() {
@@ -13,20 +12,15 @@ describe('protolib', function() {
         , arr: [1, {foo: 'bar'}]
       };
       var clone_object = protolib.clone(object);
-      assert.strictEqual(clone_object.name, 'Philip');
-      assert.strictEqual(clone_object.hello(), 'Hello, my name is Philip');
-      assert.strictEqual(clone_object.date.getMonth(), new Date().getMonth());
-      assert.strictEqual(typeOf(clone_object.arr), 'array');
-      assert.strictEqual(clone_object.arr[1].foo, "bar");
+      expect(clone_object).to.have.property('name', 'Philip');
+      expect(clone_object.hello()).to.equal('Hello, my name is Philip');
+      expect(clone_object.date.getMonth()).to.equal(new Date().getMonth());
+      expect(clone_object).to.have.deep.property('arr[0]', 1);
+      expect(clone_object).to.have.deep.property('arr[1].foo', 'bar');
     });
 
     it('should throw an error if input is not an object or array', function() {
-      try {
-        var x = protolib.clone("hello");
-      }
-      catch (err) {
-        assert(/Cannot clone/.exec(err));
-      }
+      expect(protolib.clone).to.throw('Cannot clone!');
     });
   });
 
@@ -34,9 +28,9 @@ describe('protolib', function() {
     it('should set the prototype of an object to the given value', function() {
       var proto = {foo: 'bar'};
       var object = protolib.inherit(proto);
-      assert.strictEqual(object.foo, 'bar');
+      expect(object).to.have.property('foo', 'bar');
       proto.foo = 'baz';
-      assert.strictEqual(object.foo, 'baz');
+      expect(object).to.have.property('foo', 'baz');
     });
   });
 
@@ -45,21 +39,29 @@ describe('protolib', function() {
       var proto = {type: 'list', values: [1, 2, 3]};
       var object = {readonly: true};
       protolib.mixin(object, proto);
-      assert.deepEqual(object, {readonly: true, type: 'list', values: [1, 2, 3]});
+      expect(object).to.have.property('readonly', true);
+      expect(object).to.have.property('type', 'list');
+      expect(object).to.have.deep.property('values[0]', 1);
+      expect(object).to.have.deep.property('values[1]', 2);
+      expect(object).to.have.deep.property('values[2]', 3);
     });
 
     it('should overwrite any existing properties with duplicate names', function() {
       var proto = {type: 'list', values: [1, 2, 3]};
       var object = {type: 'none'};
       protolib.mixin(object, proto);
-      assert.deepEqual(object, proto);
+      expect(object).to.have.property('type', 'list');
+      expect(object).to.have.deep.property('values[0]', 1);
+      expect(object).to.have.deep.property('values[1]', 2);
+      expect(object).to.have.deep.property('values[2]', 3);
     });
   });
 
   describe('new', function() {
     it('should return an object created with the inputted constructor and arguments', function() {
       var test = protolib.new(Date, 'December 17, 1995 03:24:00');
-      assert.strictEqual(typeOf(test), 'date');
+      expect(test).to.be.a('date');
+      //assert.strictEqual(typeOf(test), 'date');
     });
   });
 });

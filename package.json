@@ -1,6 +1,6 @@
 {
   "name": "protolib",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Javascript library for doing Object-Oriented programming using the prototype system",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Elzair/protolib",
   "devDependencies": {
+    "chai": "^1.9.1",
     "mocha": "^1.21.4"
   },
   "dependencies": {
