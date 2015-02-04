@@ -1,6 +1,6 @@
 {
   "name": "protolib",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Javascript library for doing Object-Oriented programming using the prototype system",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,6 @@
     "mocha": "^1.21.4"
   },
   "dependencies": {
-    "elucidata-type": "^1.1.1",
-    "polyfill-function-prototype-bind": "0.0.1"
+    "elucidata-type": "^1.1.1"
   }
 }
