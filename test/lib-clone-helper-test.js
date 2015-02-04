@@ -1,3 +1,4 @@
+"use strict";
 var expect = require('chai').expect
   , helper = require(__dirname + '/../lib/clone-helper')
   , typeOf = require('elucidata-type')
