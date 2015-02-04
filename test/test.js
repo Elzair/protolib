@@ -56,12 +56,4 @@ describe('protolib', function() {
       expect(object).to.have.deep.property('values[2]', 3);
     });
   });
-
-  describe('new', function() {
-    it('should return an object created with the inputted constructor and arguments', function() {
-      var test = protolib.new(Date, 'December 17, 1995 03:24:00');
-      expect(test).to.be.a('date');
-      //assert.strictEqual(typeOf(test), 'date');
-    });
-  });
 });

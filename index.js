@@ -40,8 +40,3 @@ exports.mixin = function(object, proto) {
     }
   }
 };
-
-exports.new = function() {
-  var args = Array.prototype.slice.call(arguments);
-  return new (Function.prototype.bind.apply(args[0], args.slice(1)));
-};

@@ -6,9 +6,17 @@ protolib
 Install
 -------
 
+### NPM
+
 To install **protolib** into a [Node.js](http://nodejs.org) project, input the following command in the root directory of your project.
 
     npm install protolib --save
+
+### Bower
+
+To install **protolib** into a client-side project using [Bower](http://bower.io), input the following command in the root directory of your project.
+
+    bower install protolib --save
 
 Use
 ---
@@ -79,18 +87,6 @@ Output:
   type: "list",
   values: [1, 2, 3]
 }
-```
-
-### new
-
-Do you like prototypes but still sometimes have to use constructors? Well, now you can ditch the **new** keyword and use `new()` instead.
-
-#### Example
-
-```javascript
-var protolib = require('protolib');
-var date = protolib.new(Date, 'December 17, 1995 03:24:00');
-console.log(date.getMonth()); // outputs 12
 ```
 
 Test
