@@ -29,7 +29,7 @@
     "mocha": "^1.21.4"
   },
   "dependencies": {
-    "typeof": "~1.0.0",
+    "elucidata-type": "^1.1.1",
     "polyfill-function-prototype-bind": "0.0.1"
   }
 }

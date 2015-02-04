@@ -1,6 +1,6 @@
 var clone_helper = require(__dirname + '/lib/clone-helper')
   , poly         = require('polyfill-function-prototype-bind')
-  , typeOf       = require('typeof');
+  , typeOf       = require('elucidata-type');
 
 exports.clone = function(object) {
   if (typeOf(object) !== 'object' && typeOf(object) !== 'array') {

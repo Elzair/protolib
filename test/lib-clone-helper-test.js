@@ -1,6 +1,6 @@
 var expect = require('chai').expect
   , helper = require(__dirname + '/../lib/clone-helper')
-  , typeOf = require('typeof')
+  , typeOf = require('elucidata-type')
   ;
 
 describe('lib/clone-helper', function() {
