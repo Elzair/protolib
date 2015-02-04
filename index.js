@@ -9,9 +9,9 @@ exports.clone = function(object) {
     throw new Error('Cannot clone!');
   }
 
-  var clone_object = typeOf(object) === 'array' ? [] : {};
-  var objects = [object];
-  var clone_objects = [clone_object];
+  let clone_object = typeOf(object) === 'array' ? [] : {};
+  let objects = [object];
+  let clone_objects = [clone_object];
 
   return clone_helper(object, clone_object, objects, clone_objects);
 };
@@ -33,7 +33,7 @@ exports.inherit = function(proto) {
 };
 
 exports.mixin = function(object, proto) {
-  for (var property in proto) {
+  for (let property in proto) {
     if (typeOf(proto[property]) === 'function') {
       object[property] = property[property].bind(object);
     }
