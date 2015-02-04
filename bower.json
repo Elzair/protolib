@@ -1,0 +1,18 @@
+{
+  "name": "protolib",
+  "main": "index.js",
+  "version": "0.5.0",
+  "homepage": "https://github.com/Elzair/protolib",
+  "authors": [
+    "Philip Woods <elzairthesorcerer@gmail.com>"
+  ],
+  "description": "Javascript library for doing Object-Oriented programming using the prototype system",
+  "keywords": [
+    "prototype",
+    "constructor",
+    "oop",
+    "inheritance",
+    "mixin"
+  ],
+  "license": "MIT"
+}
